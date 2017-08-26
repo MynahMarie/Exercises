@@ -1,155 +1,8 @@
-function letsPlay(notes) {
-
-  var chords = [];
-  var chord = [notes[0]];
-  var diff, idx;
-  var j = 0;
-
-  for (var i = 0; i < notes.length; i++) {
-   //chord.push(notes[i]);
-   console.log("chord: " + chord);
-   idx = i+1;
-   diff = notes[idx] - chord[j];
-   console.log("diff: " + diff);
-   if (diff == 3 || diff == 4 || diff == 5 || diff == 7 || diff == 8) {
-     chord.push(notes[idx]);
-     j++;
-   }
-   
-   if (chord.length == 3) {
-     if (Math.max(chord) - Math.min(chord) <= 12) {
-       chords.push(chord);
-       console.log("chord: " + chord);
-     }
-     chord = [];
-   }
-   //idx++;
-  }
- console.log("Chords: " + chords);  
- return chords;
-
-}
-
-// ============================================================================================= //
-
-// Version 2 //
-
-function letsPlay(notes) {
-
-  var chords = [];
-  var chord = [];
-  var diff; 
-  var idx = 0;
-
-  for (var i = 0; i < notes.length - 1; i++) {
-    chord.push(notes[i]);
-    console.log("chord[0]: " + chord);
-    for (var j = i + 1; j < notes.length; j++) {
-      
-      diff = notes[j] - chord[idx];
-      console.log("notes[j] = " + notes[j] + ", chord[idx] = " + chord[idx] + ", diff: " + diff);
-      if (diff == 3 || diff == 4 || diff == 5 || diff == 7 || diff == 8) {
-       chord.push(notes[j]);
-       console.log("chord: " + chord);
-       idx++;
-     }
-   
-     if (chord.length == 3) {
-       if (chord[2] - chord[0] <= 12) {
-         chords.push(chord);
-         console.log("chords: " + chords);
-       }
-     idx = 0;
-     chord = [];
-    }//end if 
-  }//end if j
-  idx = 0;
-  chord = [];
- }//end of i
- 
- console.log("Chords: " + chords);
- return chords;
-
-}
-
-// ============================================================================================== //
-
-function letsPlay(notes) {
-
-  var chords = [];
-  var chord = [];
-  var arr = [];
-  var diff;
-  var root;
-  var idx = 0;
-
-  function findChord(val, array) {
-
-   //console.log("args: " + val + ", " + array);
-   var ch = [];
-   var ind = 0;
-   ch.push(val);
-
-   for (var i = 0; i < array.length; i++) {
-   // Always compare between the note tested and the last 
-   // element of the chord.
-      diff = array[i] - ch[ind];
-   //If the tested note matches the criteria, add it to the chord
-   //and increase the chord idx.
-      if (diff == 3 || diff == 4 || diff == 5 || diff == 7 || diff == 8) {
-       ch.push(array[i]);
-       ind++;
-      }
-    //If we reached a full chord matching the criteria, return.
-      if (ch.length == 3 && ch[2] - ch[0] <= 12) {
-       return ch;
-      }
-    }
- // Else we know that no valid chord was found.
-   return -1;
-  }
- 
-  arr = notes.slice();
-  console.log("initial arr: " + arr);
- 
-  while (idx < notes.length - 1) {
-    root = notes[idx];
-    //No need to pass the root element in the array.
-    //It is passed seperately in the function.
-    console.log("root: " + root + ", arr: " + arr);
-    chord = findChord(root, arr);
-    console.log("chord: " + chord);
-    // If a chord was found, substract an element of the chord from
-    // the array and test again with the same root.
-    if (chord != -1) {
-      chords.push(chord);
-      arr.splice(arr.indexOf(chord[1]), 1);
-      console.log("arr after chord found: " + arr);
-      //copy = arr.slice();
-    }
-    // When no mpre chords ae found, increase the idx to test 
-    // with another root.
-    else {
-    //Restore array by making it empty and pushing back in the notes.
-      arr = [];
-      console.log("arr empty: " + arr);
-      idx++;
-      arr = notes.slice(idx);
-      console.log("arr restored: " + arr);   
-    }
-  }
- 
- console.log("Chords: " + chords);
- return chords;
-
-}
 
 
-//============================================================================ //
+/*/=========== "DESCRIPTION" ===================//
 
-// "FINAL"
 
-/*****
 
 Let's play some music!
 
@@ -197,7 +50,7 @@ If no chord combination is possible, you should return an empty array.
 Hope that's clear enough and have fun!
 
 
-*****/
+//========================================================================/*/
 
 
 function letsPlay(notes) {
